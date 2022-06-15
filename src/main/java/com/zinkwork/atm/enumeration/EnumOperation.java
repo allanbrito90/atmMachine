@@ -1,6 +1,6 @@
 package com.zinkwork.atm.enumeration;
 
 public enum EnumOperation {
-    DEPOSIT,
-    WITHDRAW;
+    CHECK_EXTRACT,
+    WITHDRAW
 }
