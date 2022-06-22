@@ -18,8 +18,8 @@ public class Banknotes extends AbstractModel implements Comparable<Banknotes>{
     Banknotes
      */
 
-    private Integer banknoteValue;
-    private Integer quantity;
+    protected Integer banknoteValue;
+    protected Integer quantity;
 
     @Override
     public int compareTo(Banknotes o) { return Integer.compare(this.banknoteValue,o.banknoteValue); }

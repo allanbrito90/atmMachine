@@ -1,13 +1,16 @@
 package com.zinkwork.atm.dto;
 
 import com.zinkwork.atm.model.Account;
-import lombok.Data;
+import com.zinkwork.atm.model.NotesGiven;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.util.Map;
 
-@Data
+@Getter
+@Setter
 public class WithdrawalDto {
     private Account account;
-    private Integer operationValue;
-
+    private Integer value;
+    private NotesGiven notesGiven;
 }
