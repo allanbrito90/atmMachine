@@ -1,6 +1,6 @@
 package com.zinkwork.atm.exception;
 
-public class WrongPassword extends Exception{
+public class WrongPassword extends RuntimeException{
 
     private static final String DEFAULT_MESSAGE = "Wrong Password";
 

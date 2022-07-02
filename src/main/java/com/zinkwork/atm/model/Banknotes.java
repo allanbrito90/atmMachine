@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -23,4 +24,18 @@ public class Banknotes extends AbstractModel implements Comparable<Banknotes>{
 
     @Override
     public int compareTo(Banknotes o) { return Integer.compare(this.banknoteValue,o.banknoteValue); }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Banknotes banknotes = (Banknotes) o;
+        return Objects.equals(banknoteValue, banknotes.banknoteValue);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), banknoteValue);
+    }
 }

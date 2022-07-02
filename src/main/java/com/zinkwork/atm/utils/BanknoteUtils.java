@@ -3,13 +3,18 @@ package com.zinkwork.atm.utils;
 import com.zinkwork.atm.exception.InvalidValueException;
 import com.zinkwork.atm.exception.NotEnoughBanknotesException;
 import com.zinkwork.atm.model.Banknotes;
+import com.zinkwork.atm.model.NotesGiven;
+import com.zinkwork.atm.model.Withdrawal;
+import com.zinkwork.atm.service.BanknotesService;
+import com.zinkwork.atm.service.NotesGivenService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
 public class BanknoteUtils {
 
     //Select the best banknotes
-    public static Map<Integer, Integer> checkNotes(List<Banknotes> availableNotes, Integer value) throws InvalidValueException, NotEnoughBanknotesException {
+    public static List<Banknotes> checkNotes(List<Banknotes> availableNotes, Integer value, NotesGivenService service, Withdrawal withdrawal) throws InvalidValueException, NotEnoughBanknotesException {
         //Check if number is multiple of 5
         if(value % 5 != 0){ throw new InvalidValueException(); }
 
@@ -19,6 +24,7 @@ public class BanknoteUtils {
 
         //Creating a new List of Notes that were given
         Map<Integer, Integer> notesGiven = new HashMap<>();
+        List<NotesGiven> notesGivenList = new ArrayList<>();
 
         //Creating the partial variable to know the amount of money
         Integer total = 0;
@@ -39,8 +45,8 @@ public class BanknoteUtils {
                 total += currentValue;
                 availableNotesArray[i].setQuantity(availableNotesArray[i].getQuantity() -1);
                 notesGiven.put(currentValue, notesGiven.get(currentValue) == null ? 1 : notesGiven.get(currentValue) + 1 );
-
                 i = -1;
+
             }
         }
 
@@ -53,7 +59,14 @@ public class BanknoteUtils {
         /*
         * At the end, the total of banknotes and its values its returned via Hashmap.
         * */
-        return notesGiven;
-    }
 
+        if(service != null){
+            for(Map.Entry<Integer,Integer> entry : notesGiven.entrySet()){
+                notesGivenList.add(new NotesGiven(entry.getKey(), entry.getValue()));
+            }
+            service.saveAll(notesGivenList);
+        }
+        withdrawal.setNotesGiven(notesGivenList);
+        return availableNotes;
+    }
 }

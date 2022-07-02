@@ -20,6 +20,17 @@ public abstract class AbstractService<L extends Long, T extends AbstractModel, U
         return object;
     }
 
+    public List<T> saveAll(List<T> objects){
+        for (T object : objects) {
+            if (object.getCreationDate() == null) {
+                object.setCreationDate(LocalDateTime.now());
+            }
+            object.setUpdateDate(LocalDateTime.now());
+        }
+        repository.saveAll(objects);
+        return objects;
+    }
+
     public Optional<T> findById(L id){return repository.findById(id);}
 
     public void delete(L id){repository.deleteById(id);}
