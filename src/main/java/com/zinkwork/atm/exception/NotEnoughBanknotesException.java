@@ -1,6 +1,6 @@
 package com.zinkwork.atm.exception;
 
-public class NotEnoughBanknotesException extends Exception{
+public class NotEnoughBanknotesException extends RuntimeException{
 
     private static final String DEFAULT_MESSAGE = "Not enough Banknotes available";
 

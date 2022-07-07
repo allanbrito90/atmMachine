@@ -14,7 +14,7 @@ import java.util.*;
 public class BanknoteUtils {
 
     //Select the best banknotes
-    public static List<Banknotes> checkNotes(List<Banknotes> availableNotes, Integer value, NotesGivenService service, Withdrawal withdrawal) throws InvalidValueException, NotEnoughBanknotesException {
+    public static List<Banknotes> checkNotes(List<Banknotes> availableNotes, Integer value, NotesGivenService service, Withdrawal withdrawal){
         //Check if number is multiple of 5
         if(value % 5 != 0){ throw new InvalidValueException(); }
 

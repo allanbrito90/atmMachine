@@ -1,0 +1,8 @@
+body{
+    background-color: gray;
+}
+
+.container{
+    background-color: white;
+    height: calc(100% - 100px);
+}

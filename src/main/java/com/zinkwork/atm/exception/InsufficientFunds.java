@@ -1,6 +1,6 @@
 package com.zinkwork.atm.exception;
 
-public class InsufficientFunds extends Exception{
+public class InsufficientFunds extends RuntimeException{
 
     private static final String DEFAULT_MESSAGE = "Insufficient Funds";
 

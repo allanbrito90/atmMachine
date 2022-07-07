@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +20,10 @@ public class Banknotes extends AbstractModel implements Comparable<Banknotes>{
     Banknotes
      */
 
+    @NotNull
     protected Integer banknoteValue;
+
+    @NotNull
     protected Integer quantity;
 
     @Override

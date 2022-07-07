@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Getter
@@ -16,7 +15,10 @@ import java.util.Objects;
 @NoArgsConstructor
 public class NotesGiven extends AbstractModel {
 
+    @NotNull
     private Integer banknoteValue;
+
+    @NotNull
     private Integer quantity;
 
     public NotesGiven (Integer banknoteValue, Integer quantity){
