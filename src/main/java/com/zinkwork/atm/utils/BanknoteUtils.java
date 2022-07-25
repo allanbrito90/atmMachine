@@ -5,13 +5,15 @@ import com.zinkwork.atm.exception.NotEnoughBanknotesException;
 import com.zinkwork.atm.model.Banknotes;
 import com.zinkwork.atm.model.NotesGiven;
 import com.zinkwork.atm.model.Withdrawal;
-import com.zinkwork.atm.service.BanknotesService;
 import com.zinkwork.atm.service.NotesGivenService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 public class BanknoteUtils {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(BanknoteUtils.class);
 
     //Select the best banknotes
     public static List<Banknotes> checkNotes(List<Banknotes> availableNotes, Integer value, NotesGivenService service, Withdrawal withdrawal){
@@ -63,6 +65,7 @@ public class BanknoteUtils {
         if(service != null){
             for(Map.Entry<Integer,Integer> entry : notesGiven.entrySet()){
                 notesGivenList.add(new NotesGiven(entry.getKey(), entry.getValue()));
+                LOGGER.info("Selected Banknote: " + entry.getValue() + " x $" + entry.getKey());
             }
             service.saveAll(notesGivenList);
         }
